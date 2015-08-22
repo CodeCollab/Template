@@ -11,7 +11,7 @@
  * @license    See the LICENSE file
  * @version    1.0.0
  */
-namespace CodeCollab\Presentation\Template;
+namespace CodeCollab\Template;
 
 /**
  * Exception which gets thrown when trying to access an undefined template variable
