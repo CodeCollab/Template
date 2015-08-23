@@ -56,11 +56,17 @@ class Html implements Renderer
             $this->variables = $data;
         }
 
-        ob_start();
+        $output = '';
 
-        require $template;
+        try {
+            ob_start();
 
-        return ob_get_clean();
+            require $template;
+        } finally {
+            $output = ob_get_clean();
+        }
+
+        return $output;
     }
 
     /**
@@ -75,11 +81,17 @@ class Html implements Renderer
     {
         $content = $this->render($template, $data);
 
-        ob_start();
+        $output = '';
 
-        require $this->basePage;
+        try {
+            ob_start();
 
-        return ob_get_clean();
+            require $this->basePage;
+        } finally {
+            $output = ob_get_clean();
+        }
+
+        return $output;
     }
 
     /**
