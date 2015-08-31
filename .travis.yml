@@ -1,3 +1,5 @@
+sudo: false
+
 language: php
 
 php:
@@ -6,7 +8,11 @@ php:
 
 before_script:
   - travis_retry composer self-update
+  - travis_retry composer require satooshi/php-coveralls:dev-master
   - travis_retry composer install --no-interaction
 
 script:
-  - phpdbg -qrr vendor/bin/phpunit --coverage-text
+  - $(php -r 'if (PHP_MAJOR_VERSION >= 7) echo "phpdbg -qrr"; else echo "php";') vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
+
+after_script:
+  - php vendor/bin/coveralls -v
