@@ -110,7 +110,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers CodeCollab\Template\Html::__construct
      * @covers CodeCollab\Template\Html::render
-     * @covers CodeCollab\Template\Html::isset
+     * @covers CodeCollab\Template\Html::__isset
      */
     public function testIssetNotSet()
     {
@@ -120,7 +120,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers CodeCollab\Template\Html::__construct
      * @covers CodeCollab\Template\Html::render
-     * @covers CodeCollab\Template\Html::isset
+     * @covers CodeCollab\Template\Html::__isset
      */
     public function testIssetSet()
     {
