@@ -7,9 +7,9 @@ php:
   - nightly
 
 before_script:
-  - travis_retry composer self-update
-  - travis_retry composer require satooshi/php-coveralls:dev-master
-  - travis_retry composer install --no-interaction
+  - composer self-update
+  - composer require satooshi/php-coveralls:dev-master
+  - composer install --no-interaction
 
 script:
   - $(php -r 'if (PHP_MAJOR_VERSION >= 7) echo "phpdbg -qrr"; else echo "php";') vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
