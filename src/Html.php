@@ -25,12 +25,12 @@ class Html implements Renderer
     /**
      * @var array List of template variables
      */
-    private $variables = [];
+    protected $variables = [];
 
     /**
      * @var string The base (skeleton) page template
      */
-    private $basePage;
+    protected $basePage;
 
     /**
      * Creates instance
@@ -101,7 +101,7 @@ class Html implements Renderer
      *
      * @return string The escaped data
      */
-    private function escape(string $data): string
+    protected function escape(string $data): string
     {
         return htmlspecialchars($data, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     }
