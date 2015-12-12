@@ -4,15 +4,10 @@ language: php
 
 php:
   - 7
-  - nightly
 
 before_script:
-  - composer self-update
-  - composer require satooshi/php-coveralls:dev-master
-  - composer install --no-interaction
+  - travis_retry composer self-update
+  - travis_retry composer install --no-interaction
 
 script:
-  - $(php -r 'if (PHP_MAJOR_VERSION >= 7) echo "phpdbg -qrr"; else echo "php";') vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
-
-after_script:
-  - php vendor/bin/coveralls -v
+  - phpdbg -qrr vendor/bin/phpunit --coverage-text
