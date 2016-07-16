@@ -52,6 +52,10 @@ class Html implements Renderer
      */
     public function render(string $template, array $data = []): string
     {
+        // we store the current state of the template variables
+        // so that we have isolated cases on multiple calls to render()
+        $backupVariables = $this->variables;
+
         if (!empty($data)) {
             $this->variables = $data;
         }
@@ -64,6 +68,8 @@ class Html implements Renderer
         } finally {
             $output = ob_get_clean();
         }
+
+        $this->variables = $backupVariables;
 
         return $output;
     }
