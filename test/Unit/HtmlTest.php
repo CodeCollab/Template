@@ -3,6 +3,8 @@
 namespace CodeCollabTest\Unit\Template;
 
 use CodeCollab\Template\Html;
+use CodeCollab\Template\Renderer;
+use CodeCollab\Template\UndefinedVariableException;
 
 class HtmlTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +20,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
      */
     public function testImplementsCorrectInterface()
     {
-        $this->assertInstanceOf('CodeCollab\Template\Renderer', $this->template);
+        $this->assertInstanceOf(Renderer::class, $this->template);
     }
 
     /**
@@ -75,11 +77,10 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
      */
     public function testRenderPageWithVariablesThrowsOnFirstUndefinedVariable()
     {
-        $this->setExpectedException('CodeCollab\Template\UndefinedVariableException');
+        $this->expectException(UndefinedVariableException::class);
+        $this->expectExceptionMessage('Undefined template variable (`first`).');
 
-        $this->template->renderPage(TEST_DATA_DIR . '/with-variables.phtml', [
-            'first'  => 1,
-        ]);
+        $this->template->renderPage(TEST_DATA_DIR . '/with-variables.phtml');
     }
 
     /**
@@ -90,10 +91,11 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
      */
     public function testRenderPageWithVariablesThrowsOnLaterUndefinedVariable()
     {
-        $this->setExpectedException('CodeCollab\Template\UndefinedVariableException');
+        $this->expectException(UndefinedVariableException::class);
+        $this->expectExceptionMessage('Undefined template variable (`second`).');
 
         $this->template->renderPage(TEST_DATA_DIR . '/with-variables.phtml', [
-            'second' => 2,
+            'first' => 1,
         ]);
     }
 
