@@ -25,12 +25,12 @@ class Html implements Renderer
     /**
      * @var array List of template variables
      */
-    protected $variables = [];
+    protected $thisShouldMakeItUniqueCodeCollabTemplateHtmlVariables = [];
 
     /**
      * @var string The base (skeleton) page template
      */
-    protected $basePage;
+    protected $thisShouldMakeItUniqueCodeCollabTemplateHtmlBasePage;
 
     /**
      * Creates instance
@@ -39,7 +39,7 @@ class Html implements Renderer
      */
     public function __construct(string $basePage)
     {
-        $this->basePage = $basePage;
+        $this->thisShouldMakeItUniqueCodeCollabTemplateHtmlBasePage = $basePage;
     }
 
     /**
@@ -54,10 +54,10 @@ class Html implements Renderer
     {
         // we store the current state of the template variables
         // so that we have isolated cases on multiple calls to render()
-        $backupVariables = $this->variables;
+        $backupVariables = $this->thisShouldMakeItUniqueCodeCollabTemplateHtmlVariables;
 
         if (!empty($data)) {
-            $this->variables = $data;
+            $this->thisShouldMakeItUniqueCodeCollabTemplateHtmlVariables = $data;
         }
 
         try {
@@ -69,7 +69,7 @@ class Html implements Renderer
             $output = ob_get_clean();
         }
 
-        $this->variables = $backupVariables;
+        $this->thisShouldMakeItUniqueCodeCollabTemplateHtmlVariables = $backupVariables;
 
         return $output;
     }
@@ -91,7 +91,7 @@ class Html implements Renderer
             ob_start();
 
             /** @noinspection PhpIncludeInspection */
-            require $this->basePage;
+            require $this->thisShouldMakeItUniqueCodeCollabTemplateHtmlBasePage;
         } finally {
             $output = ob_get_clean();
         }
@@ -122,11 +122,11 @@ class Html implements Renderer
      */
     public function __get($key)
     {
-        if (!array_key_exists($key, $this->variables)) {
+        if (!array_key_exists($key, $this->thisShouldMakeItUniqueCodeCollabTemplateHtmlVariables)) {
             throw new UndefinedVariableException('Undefined template variable (`' . $key . '`).');
         }
 
-        return $this->variables[$key];
+        return $this->thisShouldMakeItUniqueCodeCollabTemplateHtmlVariables[$key];
     }
 
     /**
@@ -138,6 +138,6 @@ class Html implements Renderer
      */
     public function __isset($key): bool
     {
-        return isset($this->variables[$key]);
+        return isset($this->thisShouldMakeItUniqueCodeCollabTemplateHtmlVariables[$key]);
     }
 }
