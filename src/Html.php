@@ -84,6 +84,8 @@ class Html implements Renderer
      */
     public function renderPage(string $template, array $data = []): string
     {
+        $this->thisShouldMakeItUniqueCodeCollabTemplateHtmlVariables = $data;
+
         /** @noinspection PhpUnusedLocalVariableInspection */
         $content = $this->render($template, $data);
 
