@@ -56,11 +56,10 @@ class Html implements Renderer
             $this->variables = $data;
         }
 
-        $output = '';
-
         try {
             ob_start();
 
+            /** @noinspection PhpIncludeInspection */
             require $template;
         } finally {
             $output = ob_get_clean();
@@ -79,13 +78,13 @@ class Html implements Renderer
      */
     public function renderPage(string $template, array $data = []): string
     {
+        /** @noinspection PhpUnusedLocalVariableInspection */
         $content = $this->render($template, $data);
-
-        $output = '';
 
         try {
             ob_start();
 
+            /** @noinspection PhpIncludeInspection */
             require $this->basePage;
         } finally {
             $output = ob_get_clean();
@@ -109,8 +108,6 @@ class Html implements Renderer
     /**
      * Magic getter
      *
-     * http://3.bp.blogspot.com/-QWWMt9EIYGY/UYh2TDoTjcI/AAAAAAAACBc/OjfEmjyi2EU/s1600/magic+meme.gif
-     *
      * @param mixed $key The key of the variable
      *
      * @return mixed The value of the variable
@@ -128,8 +125,6 @@ class Html implements Renderer
 
     /**
      * Magic isset
-     *
-     * http://www.troll.me/images/ancient-aliens-guy/im-not-saying-its-magic-but-magic-thumb.jpg
      *
      * @param mixed $key The key of the variable
      *
